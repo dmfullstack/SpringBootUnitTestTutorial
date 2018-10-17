@@ -38,7 +38,10 @@ pipeline {
             // Run integration test
             steps {
                 script {
-                  print 'Integration test is skipped'
+                     print 'Integration test is started'
+                     def targetVersion = getDevVersion()
+                    sh "'mvn' -Dbuild.number=${targetVersion} clean package test"
+                  print 'Integration test is end'
                 }
             }
         }
@@ -50,7 +53,7 @@ pipeline {
                         //timeout(time: 12, unit: 'MINUTES') {
                             // you can use the commented line if u have specific user group who CAN ONLY approve
                             //input message:'Approve deployment?', submitter: 'it-ops'
-                            input message: 'Approve deployment?'
+                            //input message: 'Approve deployment?'
                        // }
                        // timeout(time: 12, unit: 'MINUTES') {
                             //
@@ -117,7 +120,7 @@ pipeline {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                        // timeout(time: 12, unit: 'MINUTES') {
                             //input message:'Approve deployment?', submitter: 'it-ops'
-                            input message: 'Approve deployment to UAT?'
+                            //input message: 'Approve deployment to UAT?'
                        // }
                        // timeout(time: 12, unit: 'MINUTES') {
                             //  deployment job which will take the relasesed version

@@ -46,13 +46,37 @@
 		</dependency>
 	</dependencies>
 
+		<scm>
+		<connection>scm:git:https://github.com/dmfullstack/SpringBootUnitTestTutorial.git</connection>
+		<developerConnection>scm:git:git@github.com:dmfullstack/SpringBootUnitTestTutorial.git</developerConnection>
+		<url>https://github.com/dmfullstack/SpringBootUnitTestTutorial</url>
+		<tag>ORIG_HEAD</tag>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
-			<plugin>
+
+		<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-						<plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
+
+			
+				<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4.1</version>
 				<configuration>
@@ -73,6 +97,36 @@
             </plugin>
 		</plugins>
 	</build>
-
+<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

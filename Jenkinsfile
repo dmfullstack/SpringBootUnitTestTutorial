@@ -11,6 +11,9 @@ pipeline {
             steps {
                 // Run the maven build
                 script {
+                   properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('* * * * *')])])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'dmfullstack', url: 'https://github.com/dmfullstack/SpringBootUnitTestTutorial']]])
+                    
                     // Get the Maven tool.
                     // ** NOTE: This 'M3' Maven tool must be configured
                     // **       in the global configuration.

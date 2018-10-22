@@ -42,6 +42,20 @@ pipeline {
                      def targetVersion = getDevVersion()
                     sh "'mvn' -Dbuild.number=${targetVersion} clean package test"
                   print 'Integration test is end'
+                 
+                }
+            }
+        }
+        
+           stage('Sonarqube Analysis') {
+            // Run integration test
+            steps {
+                script {
+                     print 'Sonarqube Analysis is started'
+                     def targetVersion = getDevVersion()
+                    sh "'mvn' sonar:sonar -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=7000ad51a3b18fb164643f5ff3b11a9630366d56"
+                  print 'Sonarqube Analysis is end'
+       
                 }
             }
         }

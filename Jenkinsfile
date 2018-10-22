@@ -139,7 +139,7 @@ pipeline {
 
                         //}
                     }
-                }
+                } 
             }
         }
         stage('ACC E2E tests') {

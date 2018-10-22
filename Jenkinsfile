@@ -158,7 +158,8 @@ pipeline {
         
         // Always runs. And it runs before any of the other post conditions.
         always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            //archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
             junit 'target/surefire-reports/**/*.xml'
             //junit 'build/reports/**/*.xml'
              echo 'One way or another, I have finished'

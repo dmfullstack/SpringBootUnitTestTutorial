@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.model.ToDo;
 import com.example.repository.ToDoRepository;
-
+  
 @SpringBootApplication
 public class DemoApplication {
 	

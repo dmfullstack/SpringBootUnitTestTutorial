@@ -155,19 +155,30 @@ pipeline {
         }
     }
     post {
+        
         // Always runs. And it runs before any of the other post conditions.
         always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+             echo 'One way or another, I have finished'
             // Let's wipe out the workspace before we finish!
             deleteDir()
         }
         success {
+            echo 'I succeeeded!'
             sendEmail("Successful");
         }
         unstable {
+            echo 'I am unstable :/'
             sendEmail("Unstable");
         }
         failure {
+            echo 'I failed :('
             sendEmail("Failed");
+        }
+         changed {
+            echo 'Things were different before...'
+              sendEmail("Changed");
         }
     }
 

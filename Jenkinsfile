@@ -46,7 +46,7 @@ pipeline {
                 }
             }
         }
-        
+         
            stage('Sonarqube Analysis') {
             // Run integration test
             steps {

@@ -199,10 +199,11 @@ pipeline {
             echo 'I failed :('
             sendEmail("Failed");
         }
+        /*
          changed {
             echo 'Things were different before...'
               sendEmail("Changed");
-        }
+        }*/
     }
 
 // The options directive is for configuration that applies to the whole job.
